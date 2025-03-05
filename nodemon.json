@@ -1,0 +1,11 @@
+{
+    "watch": [
+        "cmd/**/*.go",
+        "internal/**/*.go"
+    ],
+    "ext": "go",
+    "ignore": [
+        "**/*.test.go"
+    ],
+    "exec": "go run cmd/api/main.go"
+}
