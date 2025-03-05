@@ -1,6 +1,10 @@
 package db
 
-import "database/sql"
+import (
+	"database/sql"
+
+	_ "github.com/lib/pq"
+)
 
 var Db *sql.DB
 
@@ -9,6 +13,7 @@ func InitDb() {
 }
 
 func connectToDb() *sql.DB {
+
 	db, err := sql.Open("postgres", "postgres://postgres:postgres@localhost:5432/newsletter?sslmode=disable")
 	if err != nil {
 		panic(err)

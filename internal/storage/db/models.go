@@ -26,7 +26,6 @@ type Newsletter struct {
 	Title       string
 	Author      int64
 	Description string
-	Status      string
 	CreatedAt   time.Time
 	UpdatedAt   time.Time
 }

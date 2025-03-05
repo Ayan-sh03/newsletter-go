@@ -50,7 +50,7 @@ func (q *Queries) CreateLetter(ctx context.Context, arg CreateLetterParams) (Let
 const createNewsletter = `-- name: CreateNewsletter :one
 INSERT INTO newsletters (title, author, description)
 VALUES ($1, $2, $3)
-RETURNING id, title, author, description, status, created_at, updated_at
+RETURNING title, author, description
 `
 
 type CreateNewsletterParams struct {
@@ -65,13 +65,9 @@ func (q *Queries) CreateNewsletter(ctx context.Context, arg CreateNewsletterPara
 	row := q.db.QueryRowContext(ctx, createNewsletter, arg.Title, arg.Author, arg.Description)
 	var i Newsletter
 	err := row.Scan(
-		&i.ID,
 		&i.Title,
 		&i.Author,
 		&i.Description,
-		&i.Status,
-		&i.CreatedAt,
-		&i.UpdatedAt,
 	)
 	return i, err
 }
@@ -986,7 +982,6 @@ func (q *Queries) UpdateNewsletter(ctx context.Context, arg UpdateNewsletterPara
 		&i.Title,
 		&i.Author,
 		&i.Description,
-		&i.Status,
 		&i.CreatedAt,
 		&i.UpdatedAt,
 	)

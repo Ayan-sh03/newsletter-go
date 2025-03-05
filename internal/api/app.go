@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"newsletter/internal/routes"
+	"newsletter/internal/storage/db"
 
 	"github.com/gorilla/handlers"
 )
@@ -12,7 +13,7 @@ import (
 func Run() {
 
 	router := routes.SetupRoutes()
-
+	db.InitDb()
 	port := ":8000"
 
 	// CORS middleware

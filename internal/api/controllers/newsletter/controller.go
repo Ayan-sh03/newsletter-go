@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 	"newsletter/internal/api/models"
 	"newsletter/internal/storage/db"
@@ -24,7 +25,7 @@ func CreateNewsletter(w http.ResponseWriter, r *http.Request) {
 	createNewsLetterParams := db.CreateNewsletterParams{
 		Title:       newsletter.Title,
 		Description: newsletter.Description,
-		// Author: newsletter.Author,
+		Author:      newsletter.Author,
 	}
 
 	fmt.Println(createNewsLetterParams)
@@ -34,6 +35,7 @@ func CreateNewsletter(w http.ResponseWriter, r *http.Request) {
 	_, err = q.CreateNewsletter(r.Context(), createNewsLetterParams)
 
 	if err != nil {
+		log.Println("Failed to create newsletter: ", err)
 		utils.RespondWithError(w, http.StatusInternalServerError, "Failed to create newsletter")
 		return
 	}
